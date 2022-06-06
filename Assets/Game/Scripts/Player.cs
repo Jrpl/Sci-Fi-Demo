@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(xInput, 0, zInput);
         Vector3 velocity = direction * _speed;
         velocity.y -= _gravity;
+        velocity = transform.TransformDirection(velocity);
         _controller.Move(velocity * Time.deltaTime);
     }
 }
