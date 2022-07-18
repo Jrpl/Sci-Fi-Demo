@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     private int _maxAmmo = 50;
     [SerializeField]
     private int _currentAmmo;
+    [SerializeField]
+    private int _coins = 0;
 
     // Weapon
     [SerializeField]
@@ -126,5 +128,10 @@ public class Player : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
+    }
+
+    public void AddCoin()
+    {
+        _coins++;
     }
 }
