@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     private AudioSource _weaponSound;
     private bool _isReloading = false;
 
+    // Managers
+    private UIManager _uiManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,10 +42,17 @@ public class Player : MonoBehaviour
             Debug.LogError("Failed to get component Audio Source on Game Object: Player");
         }
 
+        _uiManager = GameObject.Find("UI_Manager").GetComponent<UIManager>();
+        if (!_uiManager)
+        {
+            Debug.LogError("Failed to get component UIManager on Game Object: UI_Manager");
+        }
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         _currentAmmo = _maxAmmo;
+        _uiManager.UpdateAmmo(_currentAmmo);
     }
 
     // Update is called once per frame
@@ -92,6 +102,7 @@ public class Player : MonoBehaviour
             }
 
             _currentAmmo--;
+            _uiManager.UpdateAmmo(_currentAmmo);
         }
         else
         {
@@ -104,6 +115,7 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         _currentAmmo = _maxAmmo;
+        _uiManager.UpdateAmmo(_currentAmmo);
         _isReloading = false;
     }
 
