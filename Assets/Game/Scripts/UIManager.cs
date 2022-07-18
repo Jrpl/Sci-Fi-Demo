@@ -20,8 +20,8 @@ public class UIManager : MonoBehaviour
         _ammoCounter.text = "Ammo: " + count;
     }
 
-    public void DisplayCoin()
+    public void DisplayCoin(bool status)
     {
-        _coinImage.SetActive(true);
+        _coinImage.SetActive(status);
     }
 }

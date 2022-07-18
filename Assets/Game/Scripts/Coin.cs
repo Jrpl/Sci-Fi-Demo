@@ -15,7 +15,7 @@ public class Coin : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Player _player = other.gameObject.GetComponent<Player>();
-                _player.AddCoin();
+                _player.UpdateHasCoin(true);
                 AudioSource.PlayClipAtPoint(_pickupSound, transform.position, 1f);
                 Destroy(this.gameObject);
             }

@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _currentAmmo;
     [SerializeField]
-    private bool _hasCoin = false;
+    public bool _hasCoin = false;
 
     // Weapon
     [SerializeField]
@@ -130,9 +130,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AddCoin()
+    public void UpdateHasCoin(bool status)
     {
-        _hasCoin = true;
-        _uiManager.DisplayCoin();
+        _hasCoin = status;
+        _uiManager.DisplayCoin(_hasCoin);
     }
 }
