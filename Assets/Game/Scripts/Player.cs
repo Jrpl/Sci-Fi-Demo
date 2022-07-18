@@ -18,12 +18,15 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Failed to get component Character Controller on Game Object: Player");
         }
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
         CalcMovement();
+        UnHideCursor();
     }
 
     void CalcMovement()
@@ -35,5 +38,13 @@ public class Player : MonoBehaviour
         velocity.y -= _gravity;
         velocity = transform.TransformDirection(velocity);
         _controller.Move(velocity * Time.deltaTime);
+    }
+
+    void UnHideCursor()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
