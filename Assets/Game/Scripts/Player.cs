@@ -20,11 +20,15 @@ public class Player : MonoBehaviour
 
     // Weapon
     [SerializeField]
+    private GameObject _weapon;
+    [SerializeField]
     private GameObject _muzzleFlash;
     [SerializeField]
     private GameObject _hitMarker;
+    [SerializeField]
     private AudioSource _weaponSound;
     private bool _isReloading = false;
+    private bool _hasWeapon = false;
 
     // Managers
     private UIManager _uiManager;
@@ -36,12 +40,6 @@ public class Player : MonoBehaviour
         if (!_controller)
         {
             Debug.LogError("Failed to get component Character Controller on Game Object: Player");
-        }
-
-        _weaponSound = GameObject.Find("Weapon/Weapon").GetComponent<AudioSource>();
-        if (!_weaponSound)
-        {
-            Debug.LogError("Failed to get component Audio Source on Game Object: Player");
         }
 
         _uiManager = GameObject.Find("UI_Manager").GetComponent<UIManager>();
@@ -61,7 +59,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalcMovement();
-        Shoot();
+        if (_hasWeapon)
+        {
+            Shoot();
+        }
         if (Input.GetKeyDown(KeyCode.R) && _isReloading == false)
         {
             _isReloading = true;
@@ -134,5 +135,11 @@ public class Player : MonoBehaviour
     {
         _hasCoin = status;
         _uiManager.DisplayCoin(_hasCoin);
+    }
+
+    public void EnableWeapon()
+    {
+        _weapon.SetActive(true);
+        _hasWeapon = true;
     }
 }

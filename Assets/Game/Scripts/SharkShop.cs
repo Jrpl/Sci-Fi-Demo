@@ -20,6 +20,7 @@ public class SharkShop : MonoBehaviour
                 {
                     _player.UpdateHasCoin(false);
                     AudioSource.PlayClipAtPoint(_buySound, transform.position, 1f);
+                    _player.EnableWeapon();
                 }
             }
         }
