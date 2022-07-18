@@ -100,7 +100,6 @@ public class Player : MonoBehaviour
 
             if (Physics.Raycast(rayOrigin, out hitInfo, Mathf.Infinity))
             {
-                Debug.Log("Hit: " + hitInfo.transform.name);
                 Instantiate(_hitMarker, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
 
                 if (hitInfo.transform.GetComponent<Destructible>())
