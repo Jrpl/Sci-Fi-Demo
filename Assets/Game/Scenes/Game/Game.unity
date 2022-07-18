@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _muzzleFlash: {fileID: 1552750556}
+  _hitMarker: {fileID: 1278410308571632, guid: 0dca392d0ad60af418c1bace1abde0c6, type: 3}
   _speed: 3.5
   _gravity: 9.81
 --- !u!23 &253880603
