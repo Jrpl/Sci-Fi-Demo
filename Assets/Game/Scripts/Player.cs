@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     private CharacterController _controller;
     [SerializeField]
+    private GameObject _muzzleFlash;
+    [SerializeField]
     private float _speed = 3.5f;
     [SerializeField]
     private float _gravity = 9.81f;
@@ -26,6 +28,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalcMovement();
+        Fire();
         UnHideCursor();
     }
 
@@ -40,9 +43,32 @@ public class Player : MonoBehaviour
         _controller.Move(velocity * Time.deltaTime);
     }
 
+    void Fire()
+    {
+        Vector3 centerScreen = new Vector3(0.5f, 0.5f, 0);
+
+        if (Input.GetMouseButton(0))
+        {
+            _muzzleFlash.SetActive(true);
+
+            Ray rayOrigin = Camera.main.ViewportPointToRay(centerScreen);
+            RaycastHit hitInfo;
+
+            if (Physics.Raycast(rayOrigin, out hitInfo, Mathf.Infinity))
+            {
+                Debug.Log("Hit: " + hitInfo.transform.name);
+            }
+        }
+        else 
+        {
+            _muzzleFlash.SetActive(false);
+        }
+    }
+
     void UnHideCursor()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
